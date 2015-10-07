@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "Circular";
+  font-weight: 300;
+  src: url("../fonts/CircularStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Circular";
+  font-weight: 400;
+  src: url("../fonts/CircularStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Circular";
+  font-weight: 500;
+  src: url("../fonts/CircularStd-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Circular";
+  font-weight: 600;
+  src: url("../fonts/CircularStd-Black.otf") format("opentype");
+}
+
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f2f2f2;
+  font-size: 16px;
+}
+
+.tile {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  color: #FFFFFF;
+  background-color: #F2F2F2;
+  text-align: center;
+  line-height: 80px;
+  font-family: "Circular";
+  font-weight: 600;
+  font-size: 60px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 3px solid transparent;
+  box-sizing: content-box;
+}
+
+.tile.faded {
+  opacity: .9;
+  color: #000000;
+  background-color: transparent;
+}
+
+.tile.active {
+  opacity: 1;
+  color: #2700FC;
+  background-color: #F2F2F2;
+  border: 3px solid #2700FC;
+}
+
+.tile.faded.ng-enter {
+  opacity: 0;
+  transition: all .175s ease-in-out;
+}
+
+.tile.faded.ng-enter-active {
+  opacity: .9;
+}
+
+.tile.faded.ng-leave {
+  opacity: .9;
+  transition: all .175s ease-in-out;
+}
+
+.tile.faded-ng-leave-active {
+  opacity: 1;
+}
+
+.tile.active.ng-enter {
+  opacity: 0;
+  transition: all .175s ease-in-out;
+}
+
+.tile.active.ng-enter-active {
+  opacity: 1;
+}
+
+.tile.active.ng-leave {
+  opacity: 1;
+  transition: all .175s ease-in-out;
+}
+
+.tile.active.ng-leave-active {
+  opacity: 0;
+}
+
+@-webkit-keyframes anim-correct {
+  0% {
+    background: transparent;
+  }
+  
+  50% {
+    background: #1DE9B6;
+    border-color: #1DE9B6;
+    color: #F2F2F2;
+  }
+
+
+  100% {
+    background: transparent;
+  }
+}
+
+.correct {
+  -webkit-animation: anim-correct 1s;
+}
+
+@-webkit-keyframes anim-incorrect {
+  0% {
+    background: transparent;
+  }
+  
+  50% {
+    background: #FF1744;
+    border-color: #FF1744;
+    color: #F2F2F2;
+  }
+
+
+  100% {
+    background: transparent;
+  }
+}
+
+.incorrect {
+  -webkit-animation: anim-incorrect 1s;
+}
+
+.tile-wrapper {
+  width: auto;
+  display: inline-block;
+  position: relative;
+}
+
+.tile-wrapper.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.center-vertical {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
