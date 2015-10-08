@@ -26,7 +26,7 @@
 html, body {
   min-height: 100vh;
   width: 100%;
-  background-color: #f2f2f2;
+  background-color: #F2F2F2;
   font-size: 16px;
 }
 
@@ -48,8 +48,7 @@ html, body {
 }
 
 .tile.faded {
-  opacity: .9;
-  color: #000000;
+  color: #292929;
   background-color: transparent;
 }
 
@@ -66,16 +65,16 @@ html, body {
 }
 
 .tile.faded.ng-enter-active {
-  opacity: .9;
+  opacity: 1;
 }
 
 .tile.faded.ng-leave {
-  opacity: .9;
+  opacity: 1;
   transition: all .175s ease-in-out;
 }
 
 .tile.faded-ng-leave-active {
-  opacity: 1;
+  opacity: 0;
 }
 
 .tile.active.ng-enter {
@@ -155,3 +154,93 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.info-wrapper {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #9F9F9F;
+  font-size: 1rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #9F9F9F;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+a, a:visited {
+  color: #2700FC;
+  transition: all .175s ease-in-out;
+}
+
+a:hover {
+  color: #FF1744;
+}
+
+.modal-wrapper.toggle {
+  opacity: 1;
+}
+
+.modal-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity .175s ease-in-out;
+}
+
+.modal-background {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: .5;
+  background-color: #000000;
+}
+
+.modal {
+  background-color: #F2F2F2;
+  padding: 2rem;
+  position: relative;
+  z-index: 4;
+  width: 400px;
+  margin: 0 auto 0 auto;
+  font-size: 1.414rem;
+  font-weight: 600;
+  color: #292929;
+  text-align: center;
+}
+
+.modal .tweet {
+  font-size: 1rem;
+  color: #9F9F9F;
+}
+
+.my-button {
+  box-sizing: content-box;
+  width: 150px;
+  height: 50px;
+  border: 3px solid #2700FC;
+  background-color: transparent;
+  line-height: 50px;
+  margin: 2.5rem auto 0 auto;
+  font-size: 1rem;
+  color: #2700FC;
+  transition: all .175s ease-in-out;
+  cursor: pointer;
+}
+
+.my-button:hover {
+  background-color: #2700FC;
+  color: #FFFFFF;

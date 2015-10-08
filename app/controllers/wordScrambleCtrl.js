@@ -13,24 +13,77 @@ angular.module('wordscrambleapp')
     $scope.swapIndexes = new Array();
     $scope.correct = false;
     $scope.incorrect = false;
+    $scope.score = 0;
+    $scope.countdown = 60;
+    $scope.doneToggled = false;
 
-    $http.get('http://api.wordnik.com:80/v4/words.json/randomWords?hasDictionaryDef=true&minCorpusCount=1000000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=4&maxLength=7&limit=50&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5')
-      .success(function(data, status, headers, config) {
-        for (var i = 0; i < data.length; i++) {
-          var word = data[i].word.toUpperCase();
-          $scope.words.push(word);
+    $scope.initialize = function() {
+      $http.get('http://api.wordnik.com:80/v4/words.json/randomWords?hasDictionaryDef=true&minCorpusCount=1000000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=4&maxLength=7&limit=50&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5')
+        .success(function(data, status, headers, config) {
+          for (var i = 0; i < data.length; i++) {
+            var word = data[i].word.toUpperCase();
+            $scope.words.push(word);
+          }
+
+          // Intialize some variables
+          $scope.wordUnscrambled = $scope.words[$scope.wordCount];
+          $scope.wordScrambled = $filter('scramble')($scope.wordUnscrambled);
+          $scope.lettersScrambled = $scope.wordScrambled.split('');
+          $scope.lettersScrambledCopy = $scope.lettersScrambled.slice();
+          $scope.decrementCountdown();
+        })
+        .error(function(data, status, headers, config) {
+
+        });
+    }
+
+    $scope.initialize();
+
+    $scope.decrementCountdown = function() {
+      $timeout(function() {
+        $scope.countdown--;
+        if ($scope.countdown === 0) {
+          $scope.done();
+        } else {
+          $scope.decrementCountdown();
         }
+      }, 1000);
+    }
 
-        // Intialize some variables
-        $scope.wordUnscrambled = $scope.words[$scope.wordCount];
-        $scope.wordScrambled = $filter('scramble')($scope.wordUnscrambled);
-        $scope.lettersScrambled = $scope.wordScrambled.split('');
-        $scope.lettersScrambledCopy = $scope.lettersScrambled.slice();
-      })
-      .error(function(data, status, headers, config) {
+    $scope.moveElement = function (arr, oldIndex, newIndex) {
+      if (newIndex >= arr.length) {
+        var k = newIndex - arr.length;
+        while ((k--) + 1) {
+          arr.push(undefined);
+        }
+      }
 
-      });
+      arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+      return arr;
+    };
 
+    $scope.done = function() {
+      $scope.doneToggled = true;
+    }
+
+    $scope.reset = function() {
+      $scope.wordCount = 0;
+      $scope.words = new Array();
+      $scope.wordUnscrambled = '';
+      $scope.wordScrambled = '';
+      $scope.lettersScrambled = new Array();
+      $scope.lettersScrambledCopy = ''
+      $scope.lettersEntered = new Array();
+      $scope.swapCount = 0;
+      $scope.swapIndexes = new Array();
+      $scope.correct = false;
+      $scope.incorrect = false;
+      $scope.score = 0;
+      $scope.countdown = 60;
+      $scope.doneToggled = false;
+
+      $scope.initialize();
+    }
 
     $rootScope.$on('keydown', function (evt, obj, key) {
       // Swap letters on keypress
@@ -54,18 +107,6 @@ angular.module('wordscrambleapp')
       });
     });
 
-    $scope.moveElement = function (arr, oldIndex, newIndex) {
-      if (newIndex >= arr.length) {
-        var k = newIndex - arr.length;
-        while ((k--) + 1) {
-          arr.push(undefined);
-        }
-      }
-
-      arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
-      return arr;
-    };
-
     $scope.$watch('lettersEntered.length', function(newValue, oldValue) {
       // Check if entered word is correct
       if (newValue === $scope.wordUnscrambled.length && newValue > 0) {
@@ -84,6 +125,7 @@ angular.module('wordscrambleapp')
             $scope.lettersEntered = new Array();
             $scope.swapCount = 0;
             $scope.swapIndexes = new Array();
+            $scope.score += 100;
           }, 1000);
         } else {
           $scope.incorrect = true;
