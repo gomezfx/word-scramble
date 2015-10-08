@@ -1,5 +1,5 @@
 angular.module('wordscrambleapp')
-  .controller('WordScrambleCtrl', function WordScrambleCtrl($scope, $filter, $rootScope, $timeout, $http) {
+  .controller('WordScrambleCtrl', ['$scope', '$filter', '$rootScope', '$timeout', '$http', function WordScrambleCtrl($scope, $filter, $rootScope, $timeout, $http) {
     'use strict';
 
     $scope.wordCount = 0;
@@ -140,4 +140,4 @@ angular.module('wordscrambleapp')
       }
     });
 
-  });
+  }]);

@@ -1,5 +1,5 @@
 angular.module('wordscrambleapp')
-  .directive('keydown', function ($document, $rootScope) {
+  .directive('keydown', ['$document', '$rootScope', function ($document, $rootScope) {
     return {
         restrict: 'A',
         link: function () {
@@ -12,4 +12,4 @@ angular.module('wordscrambleapp')
             });
         }
     }
-  });
+  }]);
