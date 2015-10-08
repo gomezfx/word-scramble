@@ -1,6 +1,6 @@
 # Word Scramble
 
-This is a simple word scramble game built with AngularJS. Words are grabbed from the Wordnik API.
+This is a simple word scramble game built with AngularJS. Words are grabbed from the Wordnik API and you have 60 seconds to unscramble as many words as possible. There is also a simple scoring system in place.
 
 Possible improvements:
 * A more refined scoring system
